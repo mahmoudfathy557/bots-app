@@ -4,19 +4,19 @@ import star from '../../images/star.png';
 import favorite from '../../images/favorite.png';
 import data from '../../data.json';
 
-const CardBlock = () => {
+const CardBlock = ({ card, addToFavorites }) => {
 	return (
 		<CardBlockWrapper>
 			<div className='card  '>
-				<div className='star'>
-					<img src={star} alt='star' />
+				<div className='star' onClick={(e) => addToFavorites(card)}>
+					<img src={favorite} alt='star' />
 				</div>
 				<div className='bot mx-auto'>
 					<div className='image'>
-						<img src={data[0].image} className='   rounded mx-auto  d-block' alt='...' />
+						<img src={card.image} className='   rounded mx-auto  d-block' alt='...' />
 					</div>
 					<div className='bot-info mt-2'>
-						<h5>Bot name</h5>
+						<h5>{card.name}</h5>
 						<p>Router</p>
 					</div>
 				</div>
@@ -29,18 +29,23 @@ export default CardBlock;
 
 const CardBlockWrapper = styled.div`
 	.card {
-		background: white;
-
-		min-height: 20%;
-		height: 12rem;
-		box-shadow: 0px 0px 10px -2px rgb(0 0 0 / 20%);
-		position: relative;
+	background: white;
+    
+    min-height: 30%;
+    height: 13rem;
+    box-shadow: 0px 0px 10px -2px rgb(0 0 0 / 20%);
+    position: relative;
+				
+}
+ 
 	}
 
 	.star {
 		position: absolute;
 		left: 10px;
 		top: 10px;
+		cursor: pointer;
+
 	}
 
 	.bot {
@@ -49,8 +54,8 @@ const CardBlockWrapper = styled.div`
 
 	.image img {
 		border-radius: 50% !important;
-		width: 60px;
-		height: 60px;
+		width: 80px;
+		height: 80px;
 	}
 
 	h5,

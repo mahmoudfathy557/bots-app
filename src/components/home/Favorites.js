@@ -10,16 +10,6 @@ const Favorites = () => {
 	return (
 		<FavoritesWrapper>
 			<h2>Favorites</h2>
-
-			{sort.cardBlock ? (
-				<div className='row'>
-					<div className='col-2'>
-						<CardBlock />
-					</div>
-				</div>
-			) : (
-				<CardList />
-			)}
 		</FavoritesWrapper>
 	);
 };

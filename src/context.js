@@ -6,7 +6,7 @@ const BotContext = React.createContext();
 const BotProvider = ({ children }) => {
 	const [ botsData, setBotsData ] = useState(data);
 	const [ filteredBotsData, setFilteredBotsData ] = useState(data);
-	const favoritesBots = [];
+	const [ favoritesBots, setFavoritesBots ] = useState([]);
 	const [ sort, setSort ] = useState({
 		search: '',
 		orderByName: false,
@@ -60,19 +60,25 @@ const BotProvider = ({ children }) => {
 		setFilteredBotsData(tempBots);
 	};
 
+	const addToFavorites = (bot) => {
+		console.log(bot);
+	};
+
 	useEffect(
 		() => {
 			sortData();
 		},
 		[ JSON.stringify(sort) ],
 	);
-	console.log(filteredBotsData);
+
+	console.log(favoritesBots);
 	return (
 		<BotContext.Provider
 			value={{
 				filteredBotsData,
 				sort,
 				setSort,
+				addToFavorites,
 			}}>
 			{children}
 		</BotContext.Provider>
