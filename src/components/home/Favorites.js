@@ -1,21 +1,25 @@
-import React from 'react';
 import styled from 'styled-components';
 import CardBlock from './CardBlock';
 import CardList from './CardList';
+import React, { useContext, useEffect } from 'react';
+import { BotContext } from '../../context';
+
 const Favorites = () => {
+	const { sort } = useContext(BotContext);
+
 	return (
 		<FavoritesWrapper>
 			<h2>Favorites</h2>
-			{/* <div className='row'>
-				<div className='col-12 col-md-4 col-xl-2'>
-					<CardBlock />
+
+			{sort.cardBlock ? (
+				<div className='row'>
+					<div className='col-2'>
+						<CardBlock />
+					</div>
 				</div>
-			</div> */}
-			<CardList />
-			<CardList />
-			<CardList />
-			<CardList />
-			<CardList />
+			) : (
+				<CardList />
+			)}
 		</FavoritesWrapper>
 	);
 };

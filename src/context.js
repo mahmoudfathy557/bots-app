@@ -4,16 +4,18 @@ import data from './data.json';
 const BotContext = React.createContext();
 
 const BotProvider = ({ children }) => {
-	const [ isBlock, setIsBlock ] = useState(false);
-	const [ botsData, setBotsData ] = useState([]);
+	const [ botsData, setBotsData ] = useState(data);
+	const [ filteredBotsData, setFilteredBotsData ] = useState(data);
 	const favoritesBots = [];
 	const [ sort, setSort ] = useState({
 		search: '',
 		orderByName: false,
 		orderByCreation: false,
+		cardBlock: true,
+		cardList: false,
 	});
 	useEffect(() => {
-		setBotsData(data);
+		sortData();
 	}, []);
 
 	// Sorting data
@@ -31,22 +33,46 @@ const BotProvider = ({ children }) => {
 
 		// filtering by name
 		if (sort.orderByName === true) {
-			tempBots = tempBots.sort();
+			tempBots = tempBots.sort((a, b) => {
+				if (a.name < b.name) {
+					return -1;
+				}
+				if (a.name > b.name) {
+					return 1;
+				}
+				return 0;
+			});
 		}
+		// filtering by date
 
 		if (sort.orderByCreation === true) {
 			tempBots = tempBots.sort((a, b) => {
-				return a.created - b.created;
+				if (a.created < b.created) {
+					return -1;
+				}
+				if (a.created > b.created) {
+					return 1;
+				}
+				return 0;
 			});
 		}
+
+		setFilteredBotsData(tempBots);
 	};
 
-	console.log(data);
+	useEffect(
+		() => {
+			sortData();
+		},
+		[ JSON.stringify(sort) ],
+	);
+	console.log(filteredBotsData);
 	return (
 		<BotContext.Provider
 			value={{
-				isBlock,
-				botsData,
+				filteredBotsData,
+				sort,
+				setSort,
 			}}>
 			{children}
 		</BotContext.Provider>
