@@ -4,11 +4,12 @@ import starImage from '../../images/star.png';
 import favorite from '../../images/favorite.png';
 import { Link } from 'react-router-dom';
 import { BotContext } from '../../context';
+import moment from 'moment';
 
 const CardList = ({ card, star }) => {
-	const { handleFavorites } = useContext(BotContext);
+	const { handleFavorites, filteredBotsData } = useContext(BotContext);
 
-	console.log(card);
+	console.log(filteredBotsData);
 	return (
 		<CardListWrapper>
 			<div className='row mt-3'>
@@ -26,7 +27,14 @@ const CardList = ({ card, star }) => {
 									<h5 className='bot-name'>{card.name}</h5>
 								</div>
 								<div className='bot-history '>
-									<p> {card.created}</p>
+									<p>
+										Created at{' '}
+										{typeof card.created === 'object' ? (
+											moment(card.created).format('MMMM d, YYYY')
+										) : (
+											moment(card.created).format('MMMM d, YYYY')
+										)}
+									</p>
 								</div>
 							</div>
 						</Link>
