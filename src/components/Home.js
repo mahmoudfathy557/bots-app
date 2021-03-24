@@ -13,49 +13,51 @@ const Home = () => {
 	if (filteredBotsData) {
 		return (
 			<HomeWrapper>
-				<Header />
+				<div className='home-container'>
+					<Header />
 
-				<div className='favorites'>
-					<h2>Favorites</h2>
-					{sort.cardBlock ? (
-						<div className='card-block '>
-							{filteredBotsData.map((card, id) => {
+					<div className='favorites'>
+						<h2>Favorites</h2>
+						{sort.cardBlock ? (
+							<div className='card-block '>
+								{filteredBotsData.map((card, id) => {
+									if (card.favorite === true) {
+										return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
+									}
+								})}
+							</div>
+						) : (
+							filteredBotsData.map((card, id) => {
 								if (card.favorite === true) {
 									return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
 								}
-							})}
-						</div>
-					) : (
-						filteredBotsData.map((card, id) => {
-							if (card.favorite === true) {
-								return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
-							}
-						})
-					)}
-					<div className='underline mb-4' />
+							})
+						)}
+						<div className='underline mb-4' />
 
-					{sort.cardBlock ? (
-						<div className='card-block '>
-							{filteredBotsData.map((card, id) => {
+						{sort.cardBlock ? (
+							<div className='card-block '>
+								{filteredBotsData.map((card, id) => {
+									if (card.favorite === undefined) {
+										return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
+									}
+								})}
+							</div>
+						) : (
+							filteredBotsData.map((card, id) => {
 								if (card.favorite === undefined) {
 									return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
 								}
-							})}
-						</div>
-					) : (
-						filteredBotsData.map((card, id) => {
-							if (card.favorite === undefined) {
-								return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
-							}
-						})
-					)}
-				</div>
-
-				<Link to='/bots/create-bots'>
-					<div className='add-button '>
-						<img src={addBtn} alt='add btn' />
+							})
+						)}
 					</div>
-				</Link>
+
+					<Link to='/bots/create-bots'>
+						<div className='add-button '>
+							<img src={addBtn} alt='add btn' />
+						</div>
+					</Link>
+				</div>
 			</HomeWrapper>
 		);
 	}

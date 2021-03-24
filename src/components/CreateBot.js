@@ -20,7 +20,7 @@ const CreateBot = (props) => {
 	};
 
 	return (
-		<div>
+		<div className='home-container'>
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<div className='mb-3'>
 					<label className='form-label'>Short name</label>

@@ -9,7 +9,6 @@ import moment from 'moment';
 const CardList = ({ card, star }) => {
 	const { handleFavorites, filteredBotsData } = useContext(BotContext);
 
-	console.log(filteredBotsData);
 	return (
 		<CardListWrapper>
 			<div className='row mt-3'>
