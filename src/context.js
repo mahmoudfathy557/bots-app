@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import data from './data.json';
-import blip from './images/blip.png';
 
 const BotContext = React.createContext();
 
@@ -56,14 +55,13 @@ const BotProvider = ({ children }) => {
 			});
 		}
 
-		// adding to favorites
-
+		console.log(tempBots);
 		setFilteredBotsData(tempBots);
 	};
 
 	useEffect(
 		() => {
-			sortData([ ...filteredBotsData ]);
+			sortData(botsData);
 		},
 		[ JSON.stringify(sort) ],
 	);
