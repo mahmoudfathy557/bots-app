@@ -73,6 +73,7 @@ const BotProvider = ({ children }) => {
 			let newBots = filteredBotsData.filter((item) => item !== bot);
 			bot.favorite = true;
 			setFilteredBotsData([ ...newBots, bot ]);
+			setBotsData([ ...newBots, bot ]);
 		} else {
 			// remove bot from favorites
 
