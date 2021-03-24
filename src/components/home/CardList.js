@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import star from '../../images/star.png';
+import starImage from '../../images/star.png';
 import favorite from '../../images/favorite.png';
-
-const CardList = ({ card, addToFavorites }) => {
+import { Link } from 'react-router-dom';
+const CardList = ({ card, addToFavorites, star }) => {
 	console.log(card);
 	return (
 		<CardListWrapper>
@@ -11,19 +11,21 @@ const CardList = ({ card, addToFavorites }) => {
 				<div className='col'>
 					<div className='card-container d-flex  justify-content-between align-items-center'>
 						<div className='star' onClick={(e) => addToFavorites(card)}>
-							<img src={favorite} alt='star' />
+							<img src={star ? starImage : favorite} alt='star' />
 						</div>
-						<div className='card d-flex flex-row align-items-center justify-content-between   '>
-							<div className='bot-info  d-flex '>
-								<div className='image'>
-									<img src={card.image} className='rounded mx-auto  d-block' alt='...' />
+						<Link to={`/bots/${card.shortName}`} className='link'>
+							<div className='card d-flex flex-row align-items-center justify-content-between   '>
+								<div className='bot-info  d-flex '>
+									<div className='image'>
+										<img src={card.image} className='rounded mx-auto  d-block' alt='...' />
+									</div>
+									<h5 className='bot-name'>{card.name}</h5>
 								</div>
-								<h5 className='bot-name'>{card.name}</h5>
+								<div className='bot-history '>
+									<p> {card.created}</p>
+								</div>
 							</div>
-							<div className='bot-history '>
-								<p> {card.created}</p>
-							</div>
-						</div>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -62,5 +64,8 @@ const CardListWrapper = styled.div`
 	}
 	p {
 		color: #939dab;
+	}
+	.link {
+		width: 95%;
 	}
 `;

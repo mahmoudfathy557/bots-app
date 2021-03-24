@@ -10,34 +10,73 @@ import Favorites from './home/Favorites';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-	const { sort, filteredBotsData, addToFavorites } = useContext(BotContext);
+	const { sort, filteredBotsData, favoritesBots, addToFavorites } = useContext(BotContext);
+	// console.log(favoritesBots);
+	const uniqueFavBots = [];
+	for (let bot of favoritesBots) {
+		uniqueFavBots.push(bot);
+	}
+	console.log(uniqueFavBots);
+
 	return (
 		<HomeWrapper>
 			<Header />
 
 			<div className='favorites'>
 				<h2>Favorites</h2>
+				{uniqueFavBots && sort.cardBlock ? (
+					<div className='card-block '>
+						{uniqueFavBots.map((card, id) => {
+							return (
+								<CardBot
+									block={sort.cardBlock}
+									key={id}
+									card={card}
+									addToFavorites={addToFavorites}
+									star={true}
+								/>
+							);
+						})}
+					</div>
+				) : (
+					uniqueFavBots.map((card, id) => {
+						return (
+							<CardBot
+								block={sort.cardBlock}
+								key={id}
+								card={card}
+								addToFavorites={addToFavorites}
+								star={true}
+							/>
+						);
+					})
+				)}
+				<div className='underline mb-4' />
+
 				{filteredBotsData && sort.cardBlock ? (
 					<div className='card-block '>
 						{filteredBotsData.map((card, id) => {
 							return (
-								<Link to={`/bots/${card.shortName}`}>
-									<CardBot
-										block={sort.cardBlock}
-										key={id}
-										card={card}
-										addToFavorites={addToFavorites}
-									/>
-								</Link>
+								<CardBot
+									block={sort.cardBlock}
+									key={id}
+									card={card}
+									addToFavorites={addToFavorites}
+									star={false}
+								/>
 							);
 						})}
 					</div>
 				) : (
 					filteredBotsData.map((card, id) => {
 						return (
-							<Link to={`/bots/${card.shortName}`}>
-								<CardBot block={sort.cardBlock} key={id} card={card} addToFavorites={addToFavorites} />
-							</Link>
+							<CardBot
+								block={sort.cardBlock}
+								key={id}
+								card={card}
+								addToFavorites={addToFavorites}
+								star={false}
+							/>
 						);
 					})
 				)}

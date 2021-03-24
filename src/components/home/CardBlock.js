@@ -1,25 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import star from '../../images/star.png';
+import starImage from '../../images/star.png';
 import favorite from '../../images/favorite.png';
 import data from '../../data.json';
+import { Link } from 'react-router-dom';
 
-const CardBlock = ({ card, addToFavorites }) => {
+const CardBlock = ({ card, addToFavorites, star }) => {
 	return (
 		<CardBlockWrapper>
 			<div className='card  '>
 				<div className='star' onClick={(e) => addToFavorites(card)}>
-					<img src={favorite} alt='star' />
+					<img src={star ? starImage : favorite} alt='star' />
 				</div>
-				<div className='bot mx-auto'>
-					<div className='image'>
-						<img src={card.image} className='   rounded mx-auto  d-block' alt='...' />
+				<Link to={`/bots/${card.shortName}`}>
+					<div className='bot mx-auto'>
+						<div className='image'>
+							<img src={card.image} className='   rounded mx-auto  d-block' alt='...' />
+						</div>
+						<div className='bot-info mt-2'>
+							<h5>{card.name}</h5>
+							<p>Router</p>
+						</div>
 					</div>
-					<div className='bot-info mt-2'>
-						<h5>{card.name}</h5>
-						<p>Router</p>
-					</div>
-				</div>
+				</Link>
 			</div>
 		</CardBlockWrapper>
 	);
