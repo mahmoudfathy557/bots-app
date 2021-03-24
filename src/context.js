@@ -63,9 +63,7 @@ const BotProvider = ({ children }) => {
 
 	useEffect(
 		() => {
-			sortData([
-				...botsData, //...uniqueFavBots
-			]);
+			sortData([ ...filteredBotsData ]);
 		},
 		[ JSON.stringify(sort) ],
 	);
@@ -111,9 +109,7 @@ const BotProvider = ({ children }) => {
 				},
 			},
 		};
-		console.log(newBot, 'newbooot');
 		setFilteredBotsData([ ...filteredBotsData, newBot ]);
-		console.log(filteredBotsData);
 	};
 
 	return (

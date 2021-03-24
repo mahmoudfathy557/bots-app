@@ -12,8 +12,8 @@ function App() {
 			<Switch>
 				<div className='home-container'>
 					<Route path='/' exact component={Home} />
+					<Route exact path='/create-bots' component={CreateBot} />
 					<Route exact path='/bots/:id' component={SingleBotPage} />
-					<Route exact path='/bots/create' component={CreateBot} />
 				</div>
 			</Switch>
 			<Footer />

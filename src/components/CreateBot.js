@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { BotContext } from '../context';
 
 const CreateBot = (props) => {
-	console.log(props);
 	const { createNewBot } = useContext(BotContext);
 
 	const [ bot, setBot ] = useState({

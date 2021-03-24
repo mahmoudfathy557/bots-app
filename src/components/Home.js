@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from './home/Header';
 import styled from 'styled-components';
 import addBtn from '../images/add.png';
@@ -10,6 +10,7 @@ import { BotContext } from '../context';
 const Home = () => {
 	const { sort, filteredBotsData } = useContext(BotContext);
 
+	console.log(filteredBotsData);
 	return (
 		<HomeWrapper>
 			<Header />
@@ -50,7 +51,7 @@ const Home = () => {
 				)}
 			</div>
 
-			<Link to='/bots/create'>
+			<Link to='/create-bots'>
 				<div className='add-button '>
 					<img src={addBtn} alt='add btn' />
 				</div>

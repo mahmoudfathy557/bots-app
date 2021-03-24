@@ -5,13 +5,18 @@ import plano from '../images/plano.png';
 import userImg from '../images/user.png';
 import sentImg from '../images/sent.png';
 import { BotContext } from '../context';
+import moment from 'moment';
 
 const SingleBotPage = (props) => {
 	console.log(props);
-	const { botsData } = useContext(BotContext);
+	const { filteredBotsData } = useContext(BotContext);
 	const botShortName = props.match.params.id;
 
-	const bot = botsData.filter((bot) => bot.shortName === botShortName)[0];
+	const bot = filteredBotsData.filter((bot) => {
+		return bot.shortName === botShortName;
+	})[0];
+
+	// console.log(bot.created);
 
 	if (bot) {
 		return (
@@ -28,7 +33,14 @@ const SingleBotPage = (props) => {
 							</div>
 						</div>
 						<div className='bot-history'>
-							<p> Created at {bot.created}</p>
+							<p>
+								Created at{' '}
+								{typeof bot.created === 'object' ? (
+									moment(bot.created).format('MMMM d, YYYY')
+								) : (
+									moment(bot.created).format('MMMM d, YYYY')
+								)}
+							</p>
 						</div>
 					</div>
 				</div>
