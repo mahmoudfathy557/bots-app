@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import organizeBlocks from '../../images/organize-blocks.png';
 import organizeList from '../../images/organize-list.png';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { BotContext } from '../../context';
 

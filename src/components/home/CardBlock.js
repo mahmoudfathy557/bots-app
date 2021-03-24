@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import starImage from '../../images/star.png';
 import favorite from '../../images/favorite.png';
-import data from '../../data.json';
 import { Link } from 'react-router-dom';
 
 const CardBlock = ({ card, addToFavorites, star }) => {
@@ -19,7 +18,7 @@ const CardBlock = ({ card, addToFavorites, star }) => {
 						</div>
 						<div className='bot-info mt-2'>
 							<h5>{card.name}</h5>
-							<p>Router</p>
+							<p>{card.template}</p>
 						</div>
 					</div>
 				</Link>

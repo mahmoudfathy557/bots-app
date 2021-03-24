@@ -15,13 +15,20 @@ const BotProvider = ({ children }) => {
 		cardBlock: true,
 		cardList: false,
 	});
-	useEffect(() => {
-		sortData();
-	}, []);
+
+	// putting favorite bots into not repeating array
+	const uniqueFavBots = [];
+	for (let bot of favoritesBots) {
+		uniqueFavBots.push(bot);
+	}
 
 	// Sorting data
-	const sortData = () => {
-		let tempBots = [ ...botsData ];
+	const sortData = (bots) => {
+		// making a copy of original bots
+		let tempBots = [ ...bots ];
+
+		// making a copy of non favorable bots
+		tempBots = tempBots.filter((bot) => !uniqueFavBots.includes(bot));
 
 		// filtering based on search
 		if (sort.search.length > 0) {
@@ -63,16 +70,17 @@ const BotProvider = ({ children }) => {
 		setFilteredBotsData(tempBots);
 	};
 
+	useEffect(
+		() => {
+			sortData(botsData);
+		},
+		[ JSON.stringify(sort), JSON.stringify(uniqueFavBots) ],
+	);
+
+	// adding bots to favorite list
 	const addToFavorites = (bot) => {
 		setFavoritesBots(new Set([ ...favoritesBots, bot ]));
 	};
-
-	useEffect(
-		() => {
-			sortData();
-		},
-		[ JSON.stringify(sort) ],
-	);
 
 	return (
 		<BotContext.Provider
@@ -81,6 +89,7 @@ const BotProvider = ({ children }) => {
 				botsData,
 				favoritesBots,
 				sort,
+				uniqueFavBots,
 				setSort,
 				addToFavorites,
 			}}>

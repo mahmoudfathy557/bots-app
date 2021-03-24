@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import blib from '../images/blip.png';
+
 import plano from '../images/plano.png';
 import userImg from '../images/user.png';
 import sentImg from '../images/sent.png';

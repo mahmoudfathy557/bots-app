@@ -3,20 +3,11 @@ import Header from './home/Header';
 import styled from 'styled-components';
 import addBtn from '../images/add.png';
 import CardBot from './home/CardBot';
-import CardList from './home/CardList';
-import CardBlock from './home/CardBlock';
+
 import { BotContext } from '../context';
-import Favorites from './home/Favorites';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
-	const { sort, filteredBotsData, favoritesBots, addToFavorites } = useContext(BotContext);
-	// console.log(favoritesBots);
-	const uniqueFavBots = [];
-	for (let bot of favoritesBots) {
-		uniqueFavBots.push(bot);
-	}
-	console.log(uniqueFavBots);
+	const { sort, filteredBotsData, addToFavorites, uniqueFavBots } = useContext(BotContext);
 
 	return (
 		<HomeWrapper>

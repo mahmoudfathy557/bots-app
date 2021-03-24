@@ -1,7 +1,5 @@
 import React from 'react';
-import star from '../../images/star.png';
-import favorite from '../../images/favorite.png';
-import data from '../../data.json';
+
 import styled from 'styled-components';
 import CardBlock from './CardBlock';
 import CardList from './CardList';

@@ -1,12 +1,8 @@
 import styled from 'styled-components';
-import CardBlock from './CardBlock';
-import CardList from './CardList';
-import React, { useContext, useEffect } from 'react';
-import { BotContext } from '../../context';
+
+import React from 'react';
 
 const Favorites = () => {
-	const { sort } = useContext(BotContext);
-
 	return (
 		<FavoritesWrapper>
 			<h2>Favorites</h2>
