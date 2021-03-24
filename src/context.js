@@ -71,9 +71,10 @@ const BotProvider = ({ children }) => {
 		// add bot to favorites
 		if (bot.favorite === undefined || bot.favorite === false) {
 			let newBots = filteredBotsData.filter((item) => item !== bot);
+			console.log(newBots);
 			bot.favorite = true;
+			// setBotsData([ ...newBots, bot ]);
 			setFilteredBotsData([ ...newBots, bot ]);
-			setBotsData([ ...newBots, bot ]);
 		} else {
 			// remove bot from favorites
 
@@ -108,6 +109,7 @@ const BotProvider = ({ children }) => {
 			},
 		};
 		setFilteredBotsData([ ...filteredBotsData, newBot ]);
+		setBotsData([ ...filteredBotsData, newBot ]);
 	};
 
 	return (
