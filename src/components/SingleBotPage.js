@@ -13,8 +13,7 @@ const SingleBotPage = (props) => {
 
 	const bot = botsData.filter((bot) => bot.shortName === botShortName)[0];
 
-	console.log(bot);
-	if (bot && bot.analytics.user) {
+	if (bot) {
 		return (
 			<SingleBotPageWrapper>
 				<div className='row '>
@@ -94,11 +93,7 @@ const SingleBotPage = (props) => {
 			</SingleBotPageWrapper>
 		);
 	} else {
-		return (
-			<div>
-				<h1>something went error</h1>;
-			</div>
-		);
+		return null;
 	}
 };
 

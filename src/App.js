@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SingleBotPage from './components/SingleBotPage';
+import CreateBot from './components/CreateBot';
 function App() {
 	return (
 		<Router>
@@ -11,7 +12,8 @@ function App() {
 			<Switch>
 				<div className='home-container'>
 					<Route path='/' exact component={Home} />
-					<Route path='/bots/:id' exact component={SingleBotPage} />
+					<Route exact path='/bots/:id' component={SingleBotPage} />
+					<Route exact path='/bots/create' component={CreateBot} />
 				</div>
 			</Switch>
 			<Footer />

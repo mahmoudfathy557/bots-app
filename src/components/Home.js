@@ -3,6 +3,7 @@ import Header from './home/Header';
 import styled from 'styled-components';
 import addBtn from '../images/add.png';
 import CardBot from './home/CardBot';
+import { Link } from 'react-router-dom';
 
 import { BotContext } from '../context';
 
@@ -49,9 +50,11 @@ const Home = () => {
 				)}
 			</div>
 
-			<div className='add-button'>
-				<img src={addBtn} alt='add btn' />
-			</div>
+			<Link to='/bots/create'>
+				<div className='add-button '>
+					<img src={addBtn} alt='add btn' />
+				</div>
+			</Link>
 		</HomeWrapper>
 	);
 };
@@ -87,12 +90,8 @@ const HomeWrapper = styled.div`
 		width: 4rem;
 		height: 4rem;
 		border-radius: 50%;
-		position: -webkit-sticky;
 		position: fixed;
 
-		display: -webkit-box;
-		display: -webkit-flex;
-		display: -ms-flexbox;
 		display: flex;
 		padding: 1rem;
 		bottom: 1rem;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import data from './data.json';
+import blip from './images/blip.png';
 
 const BotContext = React.createContext();
 
@@ -85,9 +86,35 @@ const BotProvider = ({ children }) => {
 		}
 	};
 
-	// const reomveFromFavorites = (bot) => {
-	// 	console.log(bot);
-	// };
+	// create new bot
+	const createNewBot = (bot) => {
+		const { activeUsers, messagesReceived, messagesSent, name, shortName, totalUsers } = bot;
+
+		let newBot = {
+			shortName,
+			name,
+			image: 'https://picsum.photos/200/300',
+			description: '',
+			template: 'Router',
+			created: new Date(),
+			updated: new Date(),
+			plan: 'free',
+			culture: '',
+			analytics: {
+				user: {
+					total: totalUsers,
+					actived: activeUsers,
+				},
+				message: {
+					received: messagesReceived,
+					sent: messagesSent,
+				},
+			},
+		};
+		console.log(newBot, 'newbooot');
+		setFilteredBotsData([ ...filteredBotsData, newBot ]);
+		console.log(filteredBotsData);
+	};
 
 	return (
 		<BotContext.Provider
@@ -95,7 +122,7 @@ const BotProvider = ({ children }) => {
 				filteredBotsData,
 				botsData,
 				sort,
-
+				createNewBot,
 				setSort,
 				handleFavorites,
 			}}>
