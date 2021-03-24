@@ -10,7 +10,6 @@ import { BotContext } from '../context';
 const Home = () => {
 	const { sort, filteredBotsData } = useContext(BotContext);
 
-	console.log(filteredBotsData);
 	return (
 		<HomeWrapper>
 			<Header />

@@ -78,9 +78,8 @@ const BotProvider = ({ children }) => {
 		} else {
 			// remove bot from favorites
 
-			console.log(bot);
-			setFilteredBotsData([ ...filteredBotsData, bot ]);
 			bot.favorite = undefined;
+			setFilteredBotsData([ ...filteredBotsData ]);
 		}
 	};
 

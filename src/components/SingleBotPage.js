@@ -8,15 +8,12 @@ import { BotContext } from '../context';
 import moment from 'moment';
 
 const SingleBotPage = (props) => {
-	console.log(props);
 	const { filteredBotsData } = useContext(BotContext);
 	const botShortName = props.match.params.id;
 
 	const bot = filteredBotsData.filter((bot) => {
 		return bot.shortName === botShortName;
 	})[0];
-
-	// console.log(bot.created);
 
 	if (bot) {
 		return (
