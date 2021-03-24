@@ -4,14 +4,10 @@ import styled from 'styled-components';
 import CardBlock from './CardBlock';
 import CardList from './CardList';
 
-const CardBot = ({ block, card, addToFavorites, star }) => {
+const CardBot = ({ block, card, star }) => {
 	return (
 		<CardBotWrapper>
-			{block ? (
-				<CardBlock card={card} addToFavorites={addToFavorites} star={star} />
-			) : (
-				<CardList card={card} addToFavorites={addToFavorites} star={star} />
-			)}
+			{block ? <CardBlock card={card} star={star} /> : <CardList card={card} star={star} />}
 		</CardBotWrapper>
 	);
 };

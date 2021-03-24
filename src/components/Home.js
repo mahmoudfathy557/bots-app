@@ -7,7 +7,7 @@ import CardBot from './home/CardBot';
 import { BotContext } from '../context';
 
 const Home = () => {
-	const { sort, filteredBotsData, addToFavorites, uniqueFavBots } = useContext(BotContext);
+	const { sort, filteredBotsData } = useContext(BotContext);
 
 	return (
 		<HomeWrapper>
@@ -15,31 +15,19 @@ const Home = () => {
 
 			<div className='favorites'>
 				<h2>Favorites</h2>
-				{uniqueFavBots && sort.cardBlock ? (
+				{filteredBotsData && sort.cardBlock ? (
 					<div className='card-block '>
-						{uniqueFavBots.map((card, id) => {
-							return (
-								<CardBot
-									block={sort.cardBlock}
-									key={id}
-									card={card}
-									addToFavorites={addToFavorites}
-									star={true}
-								/>
-							);
+						{filteredBotsData.map((card, id) => {
+							if (card.favorite === true) {
+								return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
+							}
 						})}
 					</div>
 				) : (
-					uniqueFavBots.map((card, id) => {
-						return (
-							<CardBot
-								block={sort.cardBlock}
-								key={id}
-								card={card}
-								addToFavorites={addToFavorites}
-								star={true}
-							/>
-						);
+					filteredBotsData.map((card, id) => {
+						if (card.favorite === true) {
+							return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
+						}
 					})
 				)}
 				<div className='underline mb-4' />
@@ -47,28 +35,16 @@ const Home = () => {
 				{filteredBotsData && sort.cardBlock ? (
 					<div className='card-block '>
 						{filteredBotsData.map((card, id) => {
-							return (
-								<CardBot
-									block={sort.cardBlock}
-									key={id}
-									card={card}
-									addToFavorites={addToFavorites}
-									star={false}
-								/>
-							);
+							if (card.favorite === undefined) {
+								return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
+							}
 						})}
 					</div>
 				) : (
 					filteredBotsData.map((card, id) => {
-						return (
-							<CardBot
-								block={sort.cardBlock}
-								key={id}
-								card={card}
-								addToFavorites={addToFavorites}
-								star={false}
-							/>
-						);
+						if (card.favorite === undefined) {
+							return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
+						}
 					})
 				)}
 			</div>

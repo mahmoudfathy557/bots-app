@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import starImage from '../../images/star.png';
 import favorite from '../../images/favorite.png';
 import { Link } from 'react-router-dom';
-const CardList = ({ card, addToFavorites, star }) => {
+import { BotContext } from '../../context';
+
+const CardList = ({ card, star }) => {
+	const { handleFavorites } = useContext(BotContext);
+
 	console.log(card);
 	return (
 		<CardListWrapper>
 			<div className='row mt-3'>
 				<div className='col'>
 					<div className='card-container d-flex  justify-content-between align-items-center'>
-						<div className='star' onClick={(e) => addToFavorites(card)}>
+						<div className='star' onClick={(e) => handleFavorites(card)}>
 							<img src={star ? starImage : favorite} alt='star' />
 						</div>
 						<Link to={`/bots/${card.shortName}`} className='link'>

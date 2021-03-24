@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import starImage from '../../images/star.png';
 import favorite from '../../images/favorite.png';
 import { Link } from 'react-router-dom';
+import { BotContext } from '../../context';
 
-const CardBlock = ({ card, addToFavorites, star }) => {
+const CardBlock = ({ card, star }) => {
+	const { handleFavorites } = useContext(BotContext);
+
 	return (
 		<CardBlockWrapper>
 			<div className='card  '>
-				<div className='star' onClick={(e) => addToFavorites(card)}>
+				<div className='star' onClick={(e) => handleFavorites(card)}>
 					<img src={star ? starImage : favorite} alt='star' />
 				</div>
 				<Link to={`/bots/${card.shortName}`}>

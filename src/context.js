@@ -6,7 +6,6 @@ const BotContext = React.createContext();
 const BotProvider = ({ children }) => {
 	const [ botsData, setBotsData ] = useState(data);
 	const [ filteredBotsData, setFilteredBotsData ] = useState(data);
-	const [ favoritesBots, setFavoritesBots ] = useState([]);
 
 	const [ sort, setSort ] = useState({
 		search: '',
@@ -16,19 +15,10 @@ const BotProvider = ({ children }) => {
 		cardList: false,
 	});
 
-	// putting favorite bots into not repeating array
-	const uniqueFavBots = [];
-	for (let bot of favoritesBots) {
-		uniqueFavBots.push(bot);
-	}
-
 	// Sorting data
 	const sortData = (bots) => {
 		// making a copy of original bots
 		let tempBots = [ ...bots ];
-
-		// making a copy of non favorable bots
-		tempBots = tempBots.filter((bot) => !uniqueFavBots.includes(bot));
 
 		// filtering based on search
 		if (sort.search.length > 0) {
@@ -72,26 +62,42 @@ const BotProvider = ({ children }) => {
 
 	useEffect(
 		() => {
-			sortData(botsData);
+			sortData([
+				...botsData, //...uniqueFavBots
+			]);
 		},
-		[ JSON.stringify(sort), JSON.stringify(uniqueFavBots) ],
+		[ JSON.stringify(sort) ],
 	);
 
-	// adding bots to favorite list
-	const addToFavorites = (bot) => {
-		setFavoritesBots(new Set([ ...favoritesBots, bot ]));
+	// Adding / Removing bots to favorite list
+	const handleFavorites = (bot) => {
+		// add bot to favorites
+		if (bot.favorite === undefined || bot.favorite === false) {
+			let newBots = filteredBotsData.filter((item) => item !== bot);
+			bot.favorite = true;
+			setFilteredBotsData([ ...newBots, bot ]);
+		} else {
+			// remove bot from favorites
+
+			console.log(bot);
+			setFilteredBotsData([ ...filteredBotsData, bot ]);
+			bot.favorite = undefined;
+		}
 	};
+
+	// const reomveFromFavorites = (bot) => {
+	// 	console.log(bot);
+	// };
 
 	return (
 		<BotContext.Provider
 			value={{
 				filteredBotsData,
 				botsData,
-				favoritesBots,
 				sort,
-				uniqueFavBots,
+
 				setSort,
-				addToFavorites,
+				handleFavorites,
 			}}>
 			{children}
 		</BotContext.Provider>
