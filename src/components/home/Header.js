@@ -18,7 +18,7 @@ const Header = () => {
 					<div className='organize-btns d-flex  '>
 						<div className='container'>
 							<div className='row'>
-								<div className='col-4'>
+								<div className='col-12 col-md-12 col-lg-12 col-xl-4'>
 									<div className='input-group mb-3'>
 										<input
 											type='text'
@@ -29,7 +29,7 @@ const Header = () => {
 										/>
 									</div>
 								</div>
-								<div className='col-6 '>
+								<div className='col-10 col-md-10 col-lg-10  col-xl-6'>
 									<div className='btn-organize d-flex justify-content-between'>
 										<button
 											type='button'
@@ -47,9 +47,12 @@ const Header = () => {
 									</div>
 								</div>
 
-								<div className='col-2 d-flex  blocks '>
+								<div className='col-2 d-flex  blocks flex-column  flex-md-row'>
 									<div
 										className='organize-blocks'
+										data-bs-toggle='tooltip'
+										data-bs-placement='bottom'
+										title='Block View'
 										onClick={() =>
 											setSort({
 												...sort,
@@ -60,6 +63,9 @@ const Header = () => {
 									</div>
 									<div
 										className='organize-list'
+										data-bs-toggle='tooltip'
+										data-bs-placement='bottom'
+										title='List View'
 										onClick={() =>
 											setSort({
 												...sort,

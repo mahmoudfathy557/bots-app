@@ -97,5 +97,10 @@ const HomeWrapper = styled.div`
 		bottom: 1rem;
 		background: #2ec0d3;
 		right: 3rem;
+		transition: 0.3s linear all !important;
+	}
+
+	.add-button:hover {
+		background-color: #57b846;
 	}
 `;
