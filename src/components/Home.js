@@ -7,6 +7,7 @@ import CardList from './home/CardList';
 import CardBlock from './home/CardBlock';
 import { BotContext } from '../context';
 import Favorites from './home/Favorites';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 	const { sort, filteredBotsData, addToFavorites } = useContext(BotContext);
@@ -20,13 +21,24 @@ const Home = () => {
 					<div className='card-block '>
 						{filteredBotsData.map((card, id) => {
 							return (
-								<CardBot block={sort.cardBlock} key={id} card={card} addToFavorites={addToFavorites} />
+								<Link to={`/bots/${card.shortName}`}>
+									<CardBot
+										block={sort.cardBlock}
+										key={id}
+										card={card}
+										addToFavorites={addToFavorites}
+									/>
+								</Link>
 							);
 						})}
 					</div>
 				) : (
 					filteredBotsData.map((card, id) => {
-						return <CardBot block={sort.cardBlock} key={id} card={card} addToFavorites={addToFavorites} />;
+						return (
+							<Link to={`/bots/${card.shortName}`}>
+								<CardBot block={sort.cardBlock} key={id} card={card} addToFavorites={addToFavorites} />
+							</Link>
+						);
 					})
 				)}
 			</div>
@@ -43,6 +55,9 @@ export default Home;
 const HomeWrapper = styled.div`
 	position: relative;
 
+	a {
+		text-decoration: none;
+	}
 	.favorites {
 		margin-top: 2rem;
 		padding-bottom: 2rem;

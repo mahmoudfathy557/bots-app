@@ -76,6 +76,7 @@ const BotProvider = ({ children }) => {
 		<BotContext.Provider
 			value={{
 				filteredBotsData,
+				botsData,
 				sort,
 				setSort,
 				addToFavorites,
