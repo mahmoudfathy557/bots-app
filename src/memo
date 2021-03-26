@@ -18,3 +18,7 @@ interface Data {
 		},
 	},
 }
+
+	<div className="text-center">
+					<h1>Sorry, No data found!!</h1>
+				</div>

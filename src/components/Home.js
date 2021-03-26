@@ -10,64 +10,76 @@ import { BotContext } from '../context';
 const Home = () => {
 	const { sort, filteredBotsData } = useContext(BotContext);
 
-	if (filteredBotsData) {
-		return (
-			<HomeWrapper>
-				<div className='home-container'>
-					<Header />
+	console.log(filteredBotsData);
 
-					<div className='favorites'>
-						<h2>Favorites</h2>
-						{sort.cardBlock ? (
-							<div className='card-block '>
-								{filteredBotsData.map((card, id) => {
+	return (
+		<HomeWrapper>
+			<div className='home-container'>
+				<Header />
+
+				{filteredBotsData.length > 0 ? (
+					<div className='bots'>
+						<div className='favorites'>
+							{/* Favorite Bots */}
+							<h2>Favorites</h2>
+							{sort.cardBlock ? (
+								<div className='card-block '>
+									{filteredBotsData.map((card, id) => {
+										if (card.favorite === true) {
+											return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
+										}
+									})}
+								</div>
+							) : (
+								filteredBotsData.map((card, id) => {
 									if (card.favorite === true) {
 										return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
 									}
-								})}
-							</div>
-						) : (
-							filteredBotsData.map((card, id) => {
-								if (card.favorite === true) {
-									return <CardBot block={sort.cardBlock} key={id} card={card} star={true} />;
-								}
-							})
-						)}
+								})
+							)}
+						</div>
 						<div className='underline mb-4' />
 
-						{sort.cardBlock ? (
-							<div className='card-block '>
-								{filteredBotsData.map((card, id) => {
+						{/* Regular Bots  */}
+						<div className='non-favorites'>
+							{sort.cardBlock ? (
+								<div className='card-block '>
+									{filteredBotsData.map((card, id) => {
+										if (card.favorite === undefined) {
+											return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
+										}
+									})}
+								</div>
+							) : (
+								filteredBotsData.map((card, id) => {
 									if (card.favorite === undefined) {
 										return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
 									}
-								})}
-							</div>
-						) : (
-							filteredBotsData.map((card, id) => {
-								if (card.favorite === undefined) {
-									return <CardBot block={sort.cardBlock} key={id} card={card} star={false} />;
-								}
-							})
-						)}
-					</div>
-
-					<Link to='/bots/create-bots'>
-						<div className='add-button '>
-							<img src={addBtn} alt='add btn' />
+								})
+							)}
 						</div>
-					</Link>
-				</div>
-			</HomeWrapper>
-		);
-	}
+					</div>
+				) : (
+					<div className='text-center mt-5 pt-5'>
+						<h1>Sorry, No data found!!</h1>
+					</div>
+				)}
+
+				<Link to='/bots/create-bots'>
+					<div className='add-button '>
+						<img src={addBtn} alt='add btn' />
+					</div>
+				</Link>
+			</div>
+		</HomeWrapper>
+	);
 };
 
 export default Home;
 
 const HomeWrapper = styled.div`
 	position: relative;
-
+	height: 80vh;
 	a {
 		text-decoration: none;
 	}
@@ -75,7 +87,6 @@ const HomeWrapper = styled.div`
 		margin-top: 2rem;
 		padding-bottom: 2rem;
 
-		border-bottom: 3px solid #d8e4eb;
 		h2 {
 			color: #607c9a;
 			margin-bottom: 1rem;
