@@ -17,4 +17,4 @@ const Error = () => {
 
 export default Error;
 
-const ErrorWrapper = styled.div`height: 80vh;`;
+const ErrorWrapper = styled.div`height: 83vh;`;

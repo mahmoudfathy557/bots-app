@@ -10,7 +10,7 @@ import { BotContext } from '../context';
 const Home = () => {
 	const { sort, filteredBotsData } = useContext(BotContext);
 
-	console.log(filteredBotsData);
+	console.log(JSON.parse(localStorage.getItem('data')));
 
 	return (
 		<HomeWrapper>
@@ -65,6 +65,8 @@ const Home = () => {
 					</div>
 				)}
 
+				<div className='underline' />
+
 				<Link to='/bots/create-bots'>
 					<div className='add-button '>
 						<img src={addBtn} alt='add btn' />
@@ -79,7 +81,7 @@ export default Home;
 
 const HomeWrapper = styled.div`
 	position: relative;
-	height: 80vh;
+	min-height: 80vh;
 	a {
 		text-decoration: none;
 	}

@@ -4,8 +4,9 @@ import data from './data.json';
 const BotContext = React.createContext();
 
 const BotProvider = ({ children }) => {
-	const [ botsData, setBotsData ] = useState(data);
-	const [ filteredBotsData, setFilteredBotsData ] = useState(data);
+	let localStorageData = localStorage.getItem('data');
+	const [ botsData, setBotsData ] = useState(localStorageData ? JSON.parse(localStorageData) : data);
+	const [ filteredBotsData, setFilteredBotsData ] = useState(localStorageData ? JSON.parse(localStorageData) : data);
 
 	const [ sort, setSort ] = useState({
 		search: '',
@@ -15,6 +16,7 @@ const BotProvider = ({ children }) => {
 		cardList: false,
 	});
 
+	console.log(filteredBotsData);
 	// Sorting data
 	const sortData = (bots) => {
 		// making a copy of original bots
@@ -71,14 +73,15 @@ const BotProvider = ({ children }) => {
 		// add bot to favorites
 		if (bot.favorite === undefined || bot.favorite === false) {
 			let newBots = filteredBotsData.filter((item) => item !== bot);
-			console.log(newBots);
+
 			bot.favorite = true;
-			// setBotsData([ ...newBots, bot ]);
+			localStorage.setItem('data', JSON.stringify([ ...newBots, bot ]));
 			setFilteredBotsData([ ...newBots, bot ]);
 		} else {
 			// remove bot from favorites
 
 			bot.favorite = undefined;
+			localStorage.setItem('data', JSON.stringify([ ...filteredBotsData ]));
 			setFilteredBotsData([ ...filteredBotsData ]);
 		}
 	};
@@ -108,6 +111,13 @@ const BotProvider = ({ children }) => {
 				},
 			},
 		};
+		// localStorage.setItem(key, value)
+		localStorage.setItem(
+			'data',
+			localStorageData
+				? JSON.stringify([ ...JSON.parse(localStorageData), newBot ])
+				: JSON.stringify([ ...filteredBotsData, newBot ]),
+		);
 		setFilteredBotsData([ ...filteredBotsData, newBot ]);
 		setBotsData([ ...filteredBotsData, newBot ]);
 	};
